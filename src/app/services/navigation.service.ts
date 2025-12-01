@@ -25,9 +25,9 @@ export class NavigationService {
     '/vacancies': 'Vacancies',
     '/reports': 'Reports',
     '/requests': 'Request',
-    '/requests/leaves': 'leaves',
-    '/request/resignations': 'resignations',
-    'requets/heletters': 'hrletters',
+    '/requests/leaves': 'Leaves',
+    '/requests/resignations': 'Resignations',
+    '/requests/hrletters': 'HR Letters',
   };
 
   constructor(private router: Router) {
