@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ResignationService } from '../../../services/resignation.service';
+import { RequestsService } from '../../../services/requests.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,10 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class Resignations {
   resignationForm: FormGroup;
+  attachmentBase64: string | null = null;
+  name: string = 'Ahmed';
 
-  constructor(private fb: FormBuilder, private resignationService: ResignationService) {
+  constructor(private fb: FormBuilder, private resignationService: RequestsService) {
     this.resignationForm = this.fb.group({
-      requestedById: [1],
+      requestedById: [6],
       reason: ['', Validators.required],
       proposedLastWorkingDay: ['', Validators.required],
       attachment: [''],
@@ -24,10 +26,30 @@ export class Resignations {
   }
 
   submitForm() {
+    const f = this.resignationForm.value;
     const payload = {
-      ...this.resignationForm.value,
+      requestedById: Number(f.requestedById),
+      reason: f.reason,
+      proposedLastWorkingDay:
+        f.proposedLastWorkingDay?.trim() === '' ? null : f.proposedLastWorkingDay,
+      attachment: f.attachment?.trim() === '' ? null : f.attachment,
+      firstApproveId: Number(f.firstApproveId),
+      secondApproveId:
+        f.secondApproveId?.toString().trim() === '' ? null : Number(f.secondApproveId),
+      createdBy: this.name,
     };
 
-    this.resignationService.createResignationRequest(payload).subscribe(() => {});
+    this.resignationService.createResignationRequest({ ...payload }).subscribe(() => {});
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.attachmentBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 }

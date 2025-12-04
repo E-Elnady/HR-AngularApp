@@ -3,19 +3,58 @@
         <h2>Requests</h2>
 
         <table id="main-table" class="text-center">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Manger's Name</th>
-                <th>Type</th>
-                <th>Approved By</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Status</th>
-            </tr>
-            <tr>
-                <td colspan="8">No Data</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Type</th>
+                    <th>Submitted On</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (allRequests.length > 0) {
+                @for (r of allRequests; track r.id) {
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{r.name}}</td>
+                    <td>{{r.type}}</td>
+                    <td>{{ r.date | date:"medium"}}</td>
+                    <td>
+                        <span [ngClass]="{
+                        'badge-pending': r.status === 'Pending',
+                        'badge-approved': r.status === 'Approved',
+                        'badge-rejected': r.status === 'Rejected'
+                        }">{{ r.status }}
+                        </span>
+                    </td>
+                    <td>
+                        @if(r.status == "Pending")
+                        {
+                        <a class="request-action-btn edit" routerLink="/requests/leaves">View</a>
+                        <a class="request-action-btn cancel" routerLink="/requests/resignations">Cancel</a>
+                        }
+                        @else {
+                        No Action
+                        }
+                    </td>
+                    <!-- <td>
+                        <button *ngIf="role==='employee' && r.status==='Pending'">Edit</button>
+                        <button *ngIf="role!=='employee' && r.status==='Pending'">Approve</button>
+                        <button *ngIf="role!=='employee' && r.status==='Pending'">Reject</button>
+                    </td> -->
+
+                </tr>
+                }
+                } @else {
+                <tr>
+                    <td colspan="7">No Data</td>
+                </tr>
+                }
+
+            </tbody>
         </table>
     </div>
 
@@ -27,7 +66,6 @@
                 <a class="button-class" routerLink="/requests/resignations">Add Resignation</a>
                 <a class="button-class" routerLink="/requests/hrletters">Add HR Letter</a>
             </div>
-
         </div>
     </div>
 </div>

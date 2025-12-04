@@ -14,17 +14,17 @@
         </div>
 
         <div class="form-group">
-            <label>Attachment (optional)</label>
-            <input type="text" formControlName="attachment" />
+            <label>Attachment (Optional)</label>
+            <input type="file" (change)="onFileChange($event)" />
         </div>
 
         <div class="form-group">
-            <label>First Approver</label>
+            <label>First Approver ID</label>
             <input type="number" formControlName="firstApproveId" />
         </div>
 
         <div class="form-group">
-            <label>Second Approver (optional)</label>
+            <label>Second Approver ID (optional)</label>
             <input type="number" formControlName="secondApproveId" />
         </div>
 

@@ -17,9 +17,9 @@
         <div class="form-row">
             <label>Leave Type</label>
             <select formControlName="leaveType">
-                <option [value]="1">Paid</option>
-                <option [value]="2">Unpaid</option>
-                <option [value]="3">Sick</option>
+                <option *ngFor="let t of leaveTypes" [value]="t.id">
+                    {{ t.name }}
+                </option>
             </select>
         </div>
 
@@ -34,17 +34,17 @@
         </div>
 
         <div class="form-row checkbox-row">
-            <label>Is Paid?</label>
+            <label>Is Paid</label>
             <input type="checkbox" formControlName="isPaid" />
         </div>
 
         <div class="form-row">
-            <label>First Approver</label>
+            <label>First Approver ID</label>
             <input type="number" formControlName="firstApproveId" />
         </div>
 
         <div class="form-row">
-            <label>Second Approver (Optional)</label>
+            <label>Second Approver ID (Optional)</label>
             <input type="number" formControlName="secondApproveId" />
         </div>
 
