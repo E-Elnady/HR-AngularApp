@@ -60,6 +60,7 @@
                 {
                 <button class="btn btn-success btn-sm me-2" (click)="handleRequest(r,'approve')">Approve</button>
                 <button class="btn btn-danger btn-sm" (click)="handleRequest(r, 'reject')">Reject</button>
+                <button class="request-action-btn edit" [routerLink]="['/requests/view', r.id, r.type]">View</button>
                 }
                 @else {
                 No Action

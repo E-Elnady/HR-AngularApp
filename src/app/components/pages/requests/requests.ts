@@ -39,7 +39,7 @@ export class Requests implements OnInit {
   }
 
   loadRequests(StatusMap: any) {
-    this.requestsService.GetRequestsByEmployeeID(6).subscribe({
+    this.requestsService.GetRequestsByEmployeeID(1).subscribe({
       next: (req) => {
         this.allRequests = req.result.map((r) => ({
           id: r.id,
@@ -56,7 +56,7 @@ export class Requests implements OnInit {
   cancelRequest(requestId: number, requestType: string) {
     const confirmed = confirm('Are you sure you want to cancel this request?');
     if (confirmed) {
-      this.requestsService.cancelRequest(requestId, requestType, 6).subscribe({
+      this.requestsService.cancelRequest(requestId, requestType, 1).subscribe({
         next: () => {
           alert('Request canceled successfully!');
           this.loadRequests(this.StatusMap); // reload the list

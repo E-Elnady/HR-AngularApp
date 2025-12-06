@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestsService } from '../../../services/requests.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { LeaveTypes } from '../../../services/leaveType.service';
+import { LeaveTypeService } from '../../../services/leavetype.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -21,7 +21,7 @@ export class ViewRequest implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private requestsService: RequestsService,
-    private leaveTypesService: LeaveTypes
+    private leaveTypesService: LeaveTypeService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class ViewRequest implements OnInit {
         this.requestsService.getLeaveRequestById(id).subscribe((r) => {
           this.requestData = r.result;
           this.leaveTypesService
-            .GetLeaveTypesById(this.requestData.typeId)
+            .getById(this.requestData.typeId)
             .subscribe((r) => (this.leaveTypeName = r.name));
         });
         break;

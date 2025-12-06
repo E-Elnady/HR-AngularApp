@@ -67,9 +67,7 @@ export const routes: Routes = [
       { path: 'payroll', component: PayrollComponent },
       { path: 'attendance', component: AttendanceComponent },
       { path: 'vacancies', component: VacanciesComponent },
-       { path: 'Leavetyps', component: LeaveTypeComponent }
-    ]
-  }
+      { path: 'Leavetyps', component: LeaveTypeComponent },
       { path: 'requests', component: Requests },
       { path: 'requests/leaves', component: Leaves },
       { path: 'requests/resignations', component: Resignations },
